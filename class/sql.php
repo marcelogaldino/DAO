@@ -10,12 +10,12 @@ class Sql extends PDO {
 
 	}
 
-
+	// Esta função percorre 
 	private function setParams($statement, $parameters = array()) {
 
 		foreach ($parameters as $key => $value) {
 			
-			$this->setParam($key, $value);
+			$this->setParam($statement, $key, $value);
 
 		}
 
@@ -27,12 +27,12 @@ class Sql extends PDO {
 
 	}
 
-	// esta função recebe o 1º paramentro como a query que sera executada no prepare e 2º paramentro como o resultado
+	// esta função recebe o 1º paramentro como a query que sera executada no prepare e 2º parametro como o resultado
 	public function query($rawQuery, $params = array()) {
 
 		$stmt = $this->conn->prepare($rawQuery);
 
-		$this->setParams($stmt, $params);
+		var_dump($this->setParams($stmt, $params));
 
 		$stmt->execute();
 
@@ -44,7 +44,7 @@ class Sql extends PDO {
 
 		$stmt = $this->query($rawQuery, $params);
 
-		return $stmt-> fetchAll(PDO::FETCH_ASSOC);
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 }
